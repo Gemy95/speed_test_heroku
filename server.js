@@ -21,18 +21,22 @@ app.set('view engine', 'ejs');
 
 app.post("/uploadData", (req, res) => {
   if(req.body.randomDataString)
-   res.status(200).json({msg:"success"})
+   res.status(200).json({message:"test upload data succeeded"})
   else
-   res.status(400).json({msg:"failed"})
+   res.status(400).json({message:"test upload data failed !"})
 });
 
 app.get('/downloadData', function(req, res) {
     res.sendFile(__dirname+"/public/img.jpg");
 });
 
+app.get('/getResponseTime', function(req, res) {
+    res.status(200).json({message:"get request succeeded"});
+});
+
 
 app.get('/', function(req, res) {
-    res.render(__dirname+"/index");
+    res.render("index");
 });
 
 server.listen( process.env.PORT || 5050,()=>{
