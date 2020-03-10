@@ -20,24 +20,41 @@ app.use(function(req, res, next) {
 app.set('view engine', 'ejs');
 
 app.post("/uploadData", (req, res) => {
+ try
+ {
   if(req.body.randomDataString)
    res.status(200).json({message:"test upload data succeeded"})
   else
    res.status(400).json({message:"test upload data failed !"})
+ }
+ catch(err)
+ {
+    res.status(400).json({message:"test upload data failed !"})
+ }
 });
 
 app.get('/downloadData', function(req, res) {
+ try
+ {
     res.sendFile(__dirname+"/public/img.jpg");
+ }   
+    catch(err)
+ {
+    res.status(400).json({message:"test download data failed !"})
+ }
 });
 
 app.get('/getResponseTime', function(req, res) {
-    res.status(200).json({message:"get request succeeded"});
+try{
+    res.status(200).json({message:"get Response Time succeeded"});
+}
+catch(err)
+{
+   res.status(400).json({message:"test get Response Time failed !"})
+}
 });
 
 
-app.get('/', function(req, res) {
-    res.render("index");
-});
 
 server.listen( process.env.PORT || 5050,()=>{
     console.log(`server is running on port ${server.address().port}`);
